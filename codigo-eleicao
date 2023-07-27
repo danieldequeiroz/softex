@@ -7,7 +7,7 @@ function eleicao() {
 
   while (true) {
     let voto = prompt(
-      "Digite o número do candidato (1 para candidato_X, 2 para candidato_Y, 3 para candidato_Z, ou 0 para branco):"
+      "Digite o número do candidato (889 para candidato_X, 847 para candidato_Y, 515 para candidato_Z, ou 0 para branco):"
     );
 
     if (voto === null) {
