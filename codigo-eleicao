@@ -1,52 +1,51 @@
-function eleicao() {
-  let candidato_X = 0;
-  let candidato_Y = 0;
-  let candidato_Z = 0;
-  let branco = 0;
-  let nulo = 0;
+# Inicializando as variáveis dos candidatos e dos votos nulos e brancos
+candidato_X = 0
+candidato_Y = 0
+candidato_Z = 0
+voto_branco = 0
+voto_nulo = 0
 
-  while (true) {
-    let voto = prompt(
-      "Digite o número do candidato (889 para candidato_X, 847 para candidato_Y, 515 para candidato_Z, ou 0 para branco):"
-    );
+while True:
+    print("Digite o número do seu candidato:")
+    print("889 - Candidato X")
+    print("847 - Candidato Y")
+    print("515 - Candidato Z")
+    print("0 - Voto Branco")
 
-    if (voto === null) {
-      break; // Encerra a votação se o usuário cancelar a entrada
-    }
+    try:
+        voto = int(input("Insira o número do seu candidato: "))
+        if voto == 889:
+            candidato_X += 1
+        elif voto == 847:
+            candidato_Y += 1
+        elif voto == 515:
+            candidato_Z += 1
+        elif voto == 0:
+            voto_branco += 1
+        else:
+            voto_nulo += 1
+    except ValueError:
+        print("Por favor, digite um número válido!")
+        continue
 
-    voto = parseInt(voto);
+    finalizar = input("Deseja finalizar a votação? (s/n): ")
+    if finalizar.lower() == "s":
+        break
 
-    if (isNaN(voto) || voto < 0 || voto > 3) {
-      console.log("Voto inválido. Por favor, digite um número válido (1, 2, 3 ou 0).");
-    } else if (voto === 1) {
-      candidato_X++;
-    } else if (voto === 2) {
-      candidato_Y++;
-    } else if (voto === 3) {
-      candidato_Z++;
-    } else if (voto === 0) {
-      branco++;
-    }
-  }
-
-  let totalVotos = candidato_X + candidato_Y + candidato_Z + branco;
-
-  console.log(`Resultado da Eleição:`);
-  console.log(`Candidato_X: ${candidato_X} votos`);
-  console.log(`Candidato_Y: ${candidato_Y} votos`);
-  console.log(`Candidato_Z: ${candidato_Z} votos`);
-  console.log(`Votos em Branco: ${branco} votos`);
-  console.log(`Votos Nulos: ${totalVotos - (candidato_X + candidato_Y + candidato_Z + branco)} votos`);
-
-  if (candidato_X > candidato_Y && candidato_X > candidato_Z) {
-    console.log("O vencedor é o candidato_X!");
-  } else if (candidato_Y > candidato_X && candidato_Y > candidato_Z) {
-    console.log("O vencedor é o candidato_Y!");
-  } else if (candidato_Z > candidato_X && candidato_Z > candidato_Y) {
-    console.log("O vencedor é o candidato_Z!");
-  } else {
-    console.log("Houve empate entre os candidatos!");
-  }
+# Criando um dicionário para guardar os resultados
+resultados = {
+    "Candidato X": candidato_X,
+    "Candidato Y": candidato_Y,
+    "Candidato Z": candidato_Z,
+    "Voto Branco": voto_branco,
+    "Voto Nulo": voto_nulo
 }
 
-eleicao();
+# Encontrando o vencedor
+vencedor = max(resultados, key=resultados.get)
+
+print("\nResultados da Eleição:")
+for candidato, votos in resultados.items():
+    print(f"{candidato}: {votos} votos")
+
+print(f"\nO vencedor da eleição é {vencedor} com {resultados[vencedor]} votos.")
